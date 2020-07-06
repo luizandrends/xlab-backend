@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
     "target": "es5",
     "module": "commonjs",
     "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
-    "allowJs": true,
     "strictPropertyInitialization": false,
     "baseUrl": "./src",
+    "allowJs": true,
     "paths": {
       "@modules/*": ["modules/*"],
       "@config/*": ["config/*"],
