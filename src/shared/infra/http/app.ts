@@ -41,6 +41,7 @@ class App {
           });
         }
 
+        // eslint-disable-next-line no-console
         console.error(err);
 
         return response.status(500).json({
