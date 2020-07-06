@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-
+import '@shared/infra/database';
 import 'express-async-errors';
 
 import express, { Request, Response, NextFunction } from 'express';
