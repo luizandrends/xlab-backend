@@ -1,6 +1,6 @@
 import User from '../infra/database/entities/User';
 
-import IUsersDTO from '../dtos/IUsersDTO';
+import IUsersDTO from '../dtos/ICreateUsersDTO';
 
 export default interface IUsersRepository {
   findById(id: string): Promise<User | undefined>;
