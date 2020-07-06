@@ -1,3 +1,4 @@
+import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '../interfaces/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 
@@ -19,5 +20,21 @@ describe('CreateUser', () => {
     });
 
     expect(user).toHaveProperty('id');
+  });
+
+  it('should not be able to create a new user with a repeated email', async () => {
+    await createUser.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '1234',
+    });
+
+    await expect(
+      createUser.execute({
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '1234',
+      })
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
