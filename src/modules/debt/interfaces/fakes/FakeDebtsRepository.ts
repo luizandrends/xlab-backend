@@ -20,6 +20,12 @@ class FakeDebtsRepository implements IDebtsRepository {
     return findDebt;
   }
 
+  public async findByReason(reason: string): Promise<Debt | undefined> {
+    const findDebt = this.debts.find(debt => debt.debt_reason === reason);
+
+    return findDebt;
+  }
+
   public async create(data: ICreateDebtDTO): Promise<Debt> {
     const debt = new Debt();
 
