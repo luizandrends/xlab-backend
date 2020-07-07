@@ -4,6 +4,8 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import CreateUserController from '../controllers/CreateUserController';
 import UpdateUserController from '../controllers/UpdateUserController';
 
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+
 const createUserController = new CreateUserController();
 const updateUserController = new UpdateUserController();
 
@@ -23,6 +25,7 @@ userRouter.post(
 
 userRouter.put(
   '/update',
+  ensureAuthenticated,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
