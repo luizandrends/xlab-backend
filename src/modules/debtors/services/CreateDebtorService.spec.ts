@@ -38,4 +38,20 @@ describe('CreateDebtor', () => {
       })
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to create a new debtor using an existing cpf', async () => {
+    await createDebtorService.execute({
+      name: 'John Doe',
+      email: 'johndoe@gmail.com',
+      cpf: '100.200.300-40',
+    });
+
+    await expect(
+      createDebtorService.execute({
+        name: 'John Doe',
+        email: 'johndoe2@gmail.com',
+        cpf: '100.200.300-40',
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

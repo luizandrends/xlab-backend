@@ -20,6 +20,12 @@ class FakeDebtorsRepository implements IDebtorsRepository {
     return findDebtor;
   }
 
+  public async findByCpf(cpf: string): Promise<Debtor | undefined> {
+    const findDebtor = this.debtors.find(debtor => debtor.cpf === cpf);
+
+    return findDebtor;
+  }
+
   public async create(debtorData: ICreateDebtorsDTO): Promise<Debtor> {
     const debtor = new Debtor();
 
