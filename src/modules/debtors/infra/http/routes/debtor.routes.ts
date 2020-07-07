@@ -5,10 +5,12 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAut
 
 import CreateDebtorController from '../controllers/CreateDebtorController';
 import ListDebtorsController from '../controllers/ListDebtorsController';
+import ShowDebtorController from '../controllers/ShowDebtorController';
 import DeleteDebtorController from '../controllers/DeleteDebtorController';
 
 const createDebtorController = new CreateDebtorController();
 const listDebtorsController = new ListDebtorsController();
+const showDebtorController = new ShowDebtorController();
 const deleteDebtorController = new DeleteDebtorController();
 
 const debtorRouter = Router();
@@ -27,6 +29,17 @@ debtorRouter.post(
 );
 
 debtorRouter.get('/list', ensureAuthenticated, listDebtorsController.list);
+
+debtorRouter.get(
+  '/show/:debtor_id',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.PARAMS]: {
+      debtor_id: Joi.string().required(),
+    },
+  }),
+  showDebtorController.show
+);
 
 debtorRouter.delete(
   '/delete/:debtor_id',
