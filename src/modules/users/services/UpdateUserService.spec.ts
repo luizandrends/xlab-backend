@@ -23,14 +23,12 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
-      provider: false,
     });
 
     const updatedUser = await updateUserService.execute({
       user_id: user.id,
       name: 'John Trê',
       email: 'johntre@example.com',
-      provider: false,
     });
 
     expect(updatedUser.name).toBe('John Trê');
@@ -43,7 +41,6 @@ describe('UpdateProfile', () => {
         user_id: 'non-existing-user-id',
         name: 'Test',
         email: 'test@example.com',
-        provider: false,
       })
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -53,14 +50,12 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
-      provider: false,
     });
 
     const user = await fakeUsersRepository.create({
       name: 'Test',
       email: 'test@example.com',
       password: '123456',
-      provider: false,
     });
 
     await expect(
@@ -68,7 +63,6 @@ describe('UpdateProfile', () => {
         user_id: user.id,
         name: 'John Doe',
         email: 'johndoe@example.com',
-        provider: false,
       })
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -78,7 +72,6 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
-      provider: false,
     });
 
     const updatedUser = await updateUserService.execute({
@@ -87,7 +80,6 @@ describe('UpdateProfile', () => {
       email: 'johntre@example.com',
       old_password: '123456',
       password: '123123',
-      provider: false,
     });
 
     expect(updatedUser.password).toBe('123123');
@@ -98,7 +90,6 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
-      provider: false,
     });
 
     await expect(
@@ -107,7 +98,6 @@ describe('UpdateProfile', () => {
         name: 'John Trê',
         email: 'johntre@example.com',
         password: '123123',
-        provider: false,
       })
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -117,7 +107,6 @@ describe('UpdateProfile', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
-      provider: false,
     });
 
     await expect(
@@ -127,7 +116,6 @@ describe('UpdateProfile', () => {
         email: 'johntre@example.com',
         old_password: 'wrong-old-password',
         password: '123123',
-        provider: false,
       })
     ).rejects.toBeInstanceOf(AppError);
   });

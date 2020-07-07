@@ -7,7 +7,7 @@ import UpdateUserService from '@modules/users/services/UpdateUserService';
 export default class UpdateUserController {
   public async update(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
-    const { name, email, provider, old_password, password } = request.body;
+    const { name, email, old_password, password } = request.body;
 
     const updateUser = container.resolve(UpdateUserService);
 
@@ -15,7 +15,6 @@ export default class UpdateUserController {
       user_id,
       name,
       email,
-      provider,
       old_password,
       password,
     });

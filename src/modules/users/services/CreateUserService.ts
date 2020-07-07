@@ -35,7 +35,6 @@ class CreateUserService {
       name,
       email,
       password: hashedPassword,
-      provider: false,
     });
 
     return user;
