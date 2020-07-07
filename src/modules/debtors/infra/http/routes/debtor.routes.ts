@@ -4,9 +4,11 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 import CreateDebtorController from '../controllers/CreateDebtorController';
+import ListDebtorsController from '../controllers/ListDebtorsController';
 import DeleteDebtorController from '../controllers/DeleteDebtorController';
 
 const createDebtorController = new CreateDebtorController();
+const listDebtorsController = new ListDebtorsController();
 const deleteDebtorController = new DeleteDebtorController();
 
 const debtorRouter = Router();
@@ -23,6 +25,8 @@ debtorRouter.post(
   }),
   createDebtorController.create
 );
+
+debtorRouter.get('/list', ensureAuthenticated, listDebtorsController.list);
 
 debtorRouter.delete(
   '/delete/:debtor_id',
