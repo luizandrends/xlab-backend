@@ -25,7 +25,7 @@ class User {
   password: string;
 
   @Column()
-  admin: string;
+  provider: string;
 
   @CreateDateColumn()
   created_at: Date;
