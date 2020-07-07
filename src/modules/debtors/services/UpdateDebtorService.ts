@@ -26,9 +26,19 @@ class UpdateDebtorService {
     cpf,
   }: IRequest): Promise<Debtor> {
     const debtor = await this.debtorsRepository.findById(debtor_id);
+    const findDebtorByEmail = await this.debtorsRepository.findByEmail(email);
+    const findDebtorByCpf = await this.debtorsRepository.findByCpf(cpf);
 
     if (!debtor) {
       throw new AppError('Unexistent debtor', 400);
+    }
+
+    if (findDebtorByEmail) {
+      throw new AppError('Email already registered');
+    }
+
+    if (findDebtorByCpf) {
+      throw new AppError('Cpf already registered');
     }
 
     debtor.name = name;
