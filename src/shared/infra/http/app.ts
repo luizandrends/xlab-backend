@@ -1,9 +1,11 @@
 import 'reflect-metadata';
-import '@shared/infra/database';
 import 'express-async-errors';
 
+import '@shared/infra/database';
+import '@shared/container';
+
 import express, { Request, Response, NextFunction } from 'express';
-import path from 'path';
+import { errors } from 'celebrate';
 
 import routes from '@shared/infra/http/routes';
 import AppError from '@shared/errors/AppError';
@@ -16,19 +18,20 @@ class App {
 
     this.middlewares();
     this.routes();
+    this.validationErrors();
     this.handleError();
   }
 
   private middlewares(): void {
     this.express.use(express.json());
-    this.express.use(
-      '/users/files',
-      express.static(path.resolve(__dirname, '..', '..', '..', '..', 'tmp'))
-    );
   }
 
   private routes(): void {
     this.express.use(routes);
+  }
+
+  private validationErrors(): void {
+    this.express.use(errors());
   }
 
   private handleError(): void {

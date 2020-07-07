@@ -7,6 +7,8 @@ import {
   DeleteDateColumn,
 } from 'typeorm';
 
+import { Exclude } from 'class-transformer';
+
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
@@ -21,6 +23,7 @@ class User {
   @Column()
   username: string;
 
+  @Exclude()
   @Column()
   password: string;
 
