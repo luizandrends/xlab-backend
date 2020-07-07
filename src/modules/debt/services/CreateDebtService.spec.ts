@@ -50,4 +50,28 @@ describe('CreateDebt', () => {
       })
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to create a new debt with the same reason to the same user', async () => {
+    const debtor = await createDebtorService.execute({
+      name: 'John Doe',
+      email: 'johndoe@gmail.com',
+      cpf: '100.200.300-40',
+    });
+
+    await createDebtService.execute({
+      debtor_id: debtor.id,
+      debt_reason: 'Credit card bill',
+      date: new Date(),
+      value: 500,
+    });
+
+    await expect(
+      createDebtService.execute({
+        debtor_id: debtor.id,
+        debt_reason: 'tua mae',
+        date: new Date(),
+        value: 900,
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

@@ -20,8 +20,13 @@ class FakeDebtsRepository implements IDebtsRepository {
     return findDebt;
   }
 
-  public async findByReason(reason: string): Promise<Debt | undefined> {
-    const findDebt = this.debts.find(debt => debt.debt_reason === reason);
+  public async findByReason(
+    reason: string,
+    debtor_id: string
+  ): Promise<Debt | undefined> {
+    const findDebt = this.debts.find(
+      debt => debt.debt_reason === reason && debt.debtor_id === debtor_id
+    );
 
     return findDebt;
   }
