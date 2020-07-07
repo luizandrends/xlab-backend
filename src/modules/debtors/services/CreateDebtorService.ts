@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 
 import IDebtorsRepository from '../interfaces/IDebtorsRepository';
 
-import Debitor from '../infra/database/Debtor';
+import Debitor from '../infra/database/entities/Debtor';
 
 interface IRequest {
   name: string;

@@ -1,14 +1,14 @@
 import { uuid } from 'uuidv4';
 
 import ICreateDebtorsDTO from '@modules/debtors/dtos/ICreateDebtorsDTO';
-import Debtor from '../../infra/database/Debtor';
+import Debtor from '../../infra/database/entities/Debtor';
 
 import IDebtorsRepository from '../IDebtorsRepository';
 
 class FakeDebtorsRepository implements IDebtorsRepository {
   private debtors: Debtor[] = [];
 
-  public async findByid(debtor_id: string): Promise<Debtor | undefined> {
+  public async findById(debtor_id: string): Promise<Debtor | undefined> {
     const findDebtor = this.debtors.find(debtor => debtor.id === debtor_id);
 
     return findDebtor;

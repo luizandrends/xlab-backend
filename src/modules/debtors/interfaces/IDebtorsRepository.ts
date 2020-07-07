@@ -1,9 +1,9 @@
-import Debtor from '../infra/database/Debtor';
+import Debtor from '../infra/database/entities/Debtor';
 
 import ICreateDebtorsDTO from '../dtos/ICreateDebtorsDTO';
 
 export default interface IDebtorsRepository {
-  findByid(debtor_id: string): Promise<Debtor | undefined>;
+  findById(debtor_id: string): Promise<Debtor | undefined>;
   findByEmail(email: string): Promise<Debtor | undefined>;
   findByCpf(cpf: string): Promise<Debtor | undefined>;
   create(debtorData: ICreateDebtorsDTO): Promise<Debtor>;
