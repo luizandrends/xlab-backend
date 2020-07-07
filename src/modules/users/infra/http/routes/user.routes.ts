@@ -3,11 +3,13 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import CreateUserController from '../controllers/CreateUserController';
 import UpdateUserController from '../controllers/UpdateUserController';
+import ShowUserController from '../controllers/ShowUserController';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const createUserController = new CreateUserController();
 const updateUserController = new UpdateUserController();
+const showUserController = new ShowUserController();
 
 const userRouter = Router();
 
@@ -37,5 +39,7 @@ userRouter.put(
   }),
   updateUserController.update
 );
+
+userRouter.get('/show', ensureAuthenticated, showUserController.show);
 
 export default userRouter;
