@@ -13,7 +13,7 @@ class Debt {
   id: string;
 
   @Column()
-  user_id: string;
+  debtor_id: string;
 
   @Column()
   debt_reason: string;
