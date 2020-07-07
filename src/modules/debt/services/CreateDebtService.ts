@@ -1,5 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
+import AppError from '@shared/errors/AppError';
+import IDebtorsRepository from '@modules/debtors/interfaces/IDebtorsRepository';
 import Debt from '../infra/database/entities/Debt';
 
 import IDebtsRepository from '../interfaces/IDebtsRepository';
@@ -14,8 +16,11 @@ interface IRequest {
 @injectable()
 class CreateDebtService {
   constructor(
-    @inject('DebtRepository')
-    private debtsRepository: IDebtsRepository
+    @inject('DebtsRepository')
+    private debtsRepository: IDebtsRepository,
+
+    @inject('DebtorsRepository')
+    private debtorsRepository: IDebtorsRepository
   ) {}
 
   public async execute({
@@ -24,6 +29,12 @@ class CreateDebtService {
     date,
     value,
   }: IRequest): Promise<Debt> {
+    const findDebtor = await this.debtorsRepository.findById(debtor_id);
+
+    if (!findDebtor) {
+      throw new AppError('Unexistent debtor', 400);
+    }
+
     const debt = await this.debtsRepository.create({
       debtor_id,
       debt_reason,

@@ -1,6 +1,7 @@
 import FakeDebtorsRepository from '@modules/debtors/interfaces/fakes/FakeDebtorsRepository';
 import CreateDebtorService from '@modules/debtors/services/CreateDebtorService';
 
+import AppError from '@shared/errors/AppError';
 import FakeDebtsRepository from '../interfaces/fakes/FakeDebtsRepository';
 import CreateDebtService from './CreateDebtService';
 
@@ -10,13 +11,16 @@ let createDebtorService: CreateDebtorService;
 let fakeDebtsRepository: FakeDebtsRepository;
 let createDebtService: CreateDebtService;
 
-describe('CreateDebtor', () => {
+describe('CreateDebt', () => {
   beforeEach(() => {
     fakeDebtorsRepository = new FakeDebtorsRepository();
     createDebtorService = new CreateDebtorService(fakeDebtorsRepository);
 
     fakeDebtsRepository = new FakeDebtsRepository();
-    createDebtService = new CreateDebtService(fakeDebtsRepository);
+    createDebtService = new CreateDebtService(
+      fakeDebtsRepository,
+      fakeDebtorsRepository
+    );
   });
 
   it('should be able to create a new debt', async () => {
@@ -34,5 +38,16 @@ describe('CreateDebtor', () => {
     });
 
     expect(debt).toHaveProperty('id');
+  });
+
+  it('should not be able to create a new debt from an unexistent debtor', async () => {
+    await expect(
+      createDebtService.execute({
+        debtor_id: 'unexistent-debtor',
+        debt_reason: 'Credit card bill',
+        date: new Date(),
+        value: 500,
+      })
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
