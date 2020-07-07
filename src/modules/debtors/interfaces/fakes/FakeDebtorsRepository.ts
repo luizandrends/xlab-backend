@@ -1,8 +1,8 @@
 import { uuid } from 'uuidv4';
 
-import Debtor from '@modules/debtor/infra/database/Debtor';
+import ICreateDebtorsDTO from '@modules/debtors/dtos/ICreateDebtorsDTO';
+import Debtor from '../../infra/database/Debtor';
 
-import ICreateDebtorsDTO from '@modules/debtor/dtos/ICreateDebtorsDTO';
 import IDebtorsRepository from '../IDebtorsRepository';
 
 class FakeDebtorsRepository implements IDebtorsRepository {
