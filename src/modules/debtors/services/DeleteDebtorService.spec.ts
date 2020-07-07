@@ -32,7 +32,7 @@ describe('ListDebtors', () => {
   });
 
   it('should not be able to delete an unexistent debtor', async () => {
-    await expect(
+    expect(
       deleteDebtorService.execute({
         debtor_id: 'unexistent-debtor',
       })

@@ -53,7 +53,7 @@ describe('UpdateDebtor', () => {
       cpf: '100.200.300-40',
     });
 
-    expect(
+    await expect(
       updateDebtorService.execute({
         debtor_id: debtor.id,
         name: 'Dohn Joe',
