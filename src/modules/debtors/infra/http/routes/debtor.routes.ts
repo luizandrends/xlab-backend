@@ -6,11 +6,13 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAut
 import CreateDebtorController from '../controllers/CreateDebtorController';
 import ListDebtorsController from '../controllers/ListDebtorsController';
 import ShowDebtorController from '../controllers/ShowDebtorController';
+import UpdateDebtorController from '../controllers/UpdateDebtorController';
 import DeleteDebtorController from '../controllers/DeleteDebtorController';
 
 const createDebtorController = new CreateDebtorController();
 const listDebtorsController = new ListDebtorsController();
 const showDebtorController = new ShowDebtorController();
+const updateDebtorController = new UpdateDebtorController();
 const deleteDebtorController = new DeleteDebtorController();
 
 const debtorRouter = Router();
@@ -39,6 +41,22 @@ debtorRouter.get(
     },
   }),
   showDebtorController.show
+);
+
+debtorRouter.put(
+  '/update/:debtor_id',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string(),
+      email: Joi.string().email(),
+      cpf: Joi.string(),
+    },
+    [Segments.PARAMS]: {
+      debtor_id: Joi.string().required(),
+    },
+  }),
+  updateDebtorController.update
 );
 
 debtorRouter.delete(
