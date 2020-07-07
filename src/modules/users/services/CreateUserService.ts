@@ -4,6 +4,7 @@ import AppError from '@shared/errors/AppError';
 import User from '../infra/database/entities/User';
 
 import IUsersRepository from '../interfaces/IUsersRepository';
+import IHashProvider from '../providers/HashProvider/interfaces/IHashProvider';
 
 interface IRequest {
   name: string;
@@ -15,7 +16,10 @@ interface IRequest {
 class CreateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute({ name, email, password }: IRequest): Promise<User> {
