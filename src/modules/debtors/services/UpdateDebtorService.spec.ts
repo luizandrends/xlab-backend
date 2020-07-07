@@ -35,6 +35,17 @@ describe('UpdateDebtor', () => {
     expect(updateDebtor.cpf).toEqual('500.600.700-80');
   });
 
+  it('should not be able to update a unexistent debtor', async () => {
+    await expect(
+      updateDebtorService.execute({
+        debtor_id: 'unexistent-id',
+        name: 'Dohn Joe',
+        email: 'dohnjoe@gmail.com',
+        cpf: '500.600.700-80',
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
   it('should not be able to update a debtor with an existent email', async () => {
     const debtor = await createDebtorService.execute({
       name: 'John Doe',
