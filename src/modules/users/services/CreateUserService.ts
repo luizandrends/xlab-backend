@@ -29,10 +29,12 @@ class CreateUserService {
       throw new AppError('Email already exists', 400);
     }
 
+    const hashedPassword = await this.hashProvider.generateHash(password);
+
     const user = this.usersRepository.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       provider: false,
     });
 
