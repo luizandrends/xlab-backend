@@ -10,7 +10,7 @@ interface IRequest {
 @injectable()
 class DeleteDebtService {
   constructor(
-    @inject('DebtorsRepository')
+    @inject('DebtsRepository')
     private debtsRepository: IDebtsRepository
   ) {}
 

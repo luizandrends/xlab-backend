@@ -4,8 +4,10 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 import CreateDebtController from '../controllers/CreateDebtController';
+import DeleteDebtController from '../controllers/DeleteDebtController';
 
 const createDebtController = new CreateDebtController();
+const deleteDebtController = new DeleteDebtController();
 
 const debtRouter = Router();
 
@@ -21,6 +23,17 @@ debtRouter.post(
     },
   }),
   createDebtController.create
+);
+
+debtRouter.delete(
+  '/delete/:debt_id',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.PARAMS]: {
+      debt_id: Joi.string().required(),
+    },
+  }),
+  deleteDebtController.delete
 );
 
 export default debtRouter;
