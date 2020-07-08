@@ -1,10 +1,11 @@
 import FakeDebtorsRepository from '@modules/debtors/interfaces/fakes/FakeDebtorsRepository';
 import CreateDebtorService from '@modules/debtors/services/CreateDebtorService';
 
+import AppError from '@shared/errors/AppError';
 import FakeDebtsRepository from '../interfaces/fakes/FakeDebtsRepository';
 import CreateDebtService from './CreateDebtService';
 
-import ListDebtsService from './ListDebtsService';
+import ShowDebtService from './ShowDebtService';
 
 let fakeDebtorsRepository: FakeDebtorsRepository;
 let createDebtorService: CreateDebtorService;
@@ -12,9 +13,9 @@ let createDebtorService: CreateDebtorService;
 let fakeDebtsRepository: FakeDebtsRepository;
 let createDebtService: CreateDebtService;
 
-let listDebtsService: ListDebtsService;
+let showDebtService: ShowDebtService;
 
-describe('ListDebts', () => {
+describe('ListDebtors', () => {
   beforeEach(() => {
     fakeDebtorsRepository = new FakeDebtorsRepository();
     createDebtorService = new CreateDebtorService(fakeDebtorsRepository);
@@ -25,7 +26,7 @@ describe('ListDebts', () => {
       fakeDebtorsRepository
     );
 
-    listDebtsService = new ListDebtsService(fakeDebtsRepository);
+    showDebtService = new ShowDebtService(fakeDebtsRepository);
   });
 
   it('should be able to list all debts', async () => {
@@ -35,22 +36,25 @@ describe('ListDebts', () => {
       cpf: '100.200.300-40',
     });
 
-    const debt1 = await createDebtService.execute({
+    const debt = await createDebtService.execute({
       debtor_id: debtor.id,
       debt_reason: 'Credit card bill',
       date: new Date(2021, 7, 7, 13),
       value: 500,
     });
 
-    const debt2 = await createDebtService.execute({
-      debtor_id: debtor.id,
-      debt_reason: 'T-Mobile bill',
-      date: new Date(2021, 7, 7, 13),
-      value: 500,
+    const showDebt = await showDebtService.execute({
+      debt_id: debt.id,
     });
 
-    const debts = await listDebtsService.execute();
+    expect(showDebt).toEqual(debt);
+  });
 
-    expect(debts).toEqual([debt1, debt2]);
+  it('should not be able to list an unexistend debit', async () => {
+    await expect(
+      showDebtService.execute({
+        debt_id: 'unexistent debit',
+      })
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
