@@ -5,7 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import Debtor from '@modules/debtors/infra/database/entities/Debtor';
 
 @Entity('debts')
 class Debt {
@@ -23,6 +26,10 @@ class Debt {
 
   @Column()
   value: number;
+
+  @ManyToOne(() => Debtor)
+  @JoinColumn({ name: 'debtor_id' })
+  debtor: Debtor;
 
   @CreateDateColumn()
   created_at: Date;
