@@ -56,6 +56,7 @@ class FakeDebtsRepository implements IDebtsRepository {
   public async listByDebtor(debtor_id: string): Promise<Debt[]> {
     const listDebts = this.ormRepository.find({
       where: { debtor_id },
+      relations: ['debtor'],
     });
 
     return listDebts;
