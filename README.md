@@ -22,6 +22,13 @@
   <li>Para a configuração do ORM está juntamente disponibilizado o arquivo <strong>ormconfig.example.json</strong>.</li>
 <ol>
 </div>
+  
+<div>
+<h2> Banco de dados </h2>
+<ol>
+  <li>Após criado o arquivo <strong>ormcongif.json</strong> voce pode criar na sua GUI de Postgres uma database com o nome igual ao dado no campo database do ormconfig.</li>
+<ol>
+</div>
 
 <div>
 <h2> Dependencias </h2>
@@ -29,6 +36,13 @@
   <li>Após todos estes passos, é necessario rodar o script <strong>yarn</strong> em seu terminal para adicionar as dependencias do projeto.</li>
   <li>Caso o arquivo <strong>ts-config.json</strong> passe por problemas, você pode rodar o comando <strong>ysrn tsc --init</strong> e colocar o json disponibilizado no memo arquivo deste repositório.</li>
   <li>Após toda a configuração de ambiente e instalação de dependencias você pode rodar o seu servidor com o script <strong>yarn dev:server</strong></li>
+<ol>
+</div>
+  
+<div>
+<h2> Migrations </h2>
+<ol>
+  <li>Apos as dependencias terem sido instaladas, voce pode rodar as migrations com o comando <strong>yarn typeorm migration:run</strong>.</li>
 <ol>
 </div>
 
