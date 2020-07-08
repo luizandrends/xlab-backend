@@ -49,6 +49,14 @@ class FakeDebtsRepository implements IDebtsRepository {
     return listDebts;
   }
 
+  public async listByDebtor(debitor_id: string): Promise<Debt[]> {
+    const listDebts = this.debts.filter(debt => {
+      return debt.debtor_id === debitor_id;
+    });
+
+    return listDebts;
+  }
+
   public async save(debt: Debt): Promise<Debt> {
     const findIndex = this.debts.findIndex(findDebt => findDebt.id === debt.id);
 
