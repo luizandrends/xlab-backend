@@ -4,7 +4,7 @@ import { classToClass } from 'class-transformer';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
 
-class UserController {
+class CreateUserController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body;
 
@@ -19,4 +19,4 @@ class UserController {
   }
 }
 
-export default UserController;
+export default CreateUserController;

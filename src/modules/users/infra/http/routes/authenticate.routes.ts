@@ -3,8 +3,9 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import AuthenticateUserController from '../controllers/AuthenticateUserController';
 
-const sessionsRouter = Router();
 const authenticateUserController = new AuthenticateUserController();
+
+const sessionsRouter = Router();
 
 sessionsRouter.post(
   '/',

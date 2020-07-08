@@ -1,3 +1,5 @@
+import AppError from '@shared/errors/AppError';
+
 import FakeDebtorsRepository from '../interfaces/fakes/FakeDebtorsRepository';
 
 import CreateDebitorService from './CreateDebtorService';
@@ -7,7 +9,7 @@ let fakeDebtorRepository: FakeDebtorsRepository;
 let createDebtorService: CreateDebitorService;
 let showDebtorService: ShowDebtorService;
 
-describe('ListDebtors', () => {
+describe('ShowDebtor', () => {
   beforeEach(() => {
     fakeDebtorRepository = new FakeDebtorsRepository();
 
@@ -36,6 +38,6 @@ describe('ListDebtors', () => {
       showDebtorService.execute({
         debtor_id: 'unexistent-debtor',
       })
-    );
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

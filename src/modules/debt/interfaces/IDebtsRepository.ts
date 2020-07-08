@@ -1,4 +1,5 @@
 import ICreateDebtDTO from '../dtos/ICreateDebtDTO';
+
 import Debt from '../infra/database/entities/Debt';
 
 export default interface IDebtsRepository {

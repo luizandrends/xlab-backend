@@ -1,7 +1,8 @@
+import AppError from '@shared/errors/AppError';
+
 import FakeDebtorsRepository from '@modules/debtors/interfaces/fakes/FakeDebtorsRepository';
 import CreateDebtorService from '@modules/debtors/services/CreateDebtorService';
 
-import AppError from '@shared/errors/AppError';
 import FakeDebtsRepository from '../interfaces/fakes/FakeDebtsRepository';
 import CreateDebtService from './CreateDebtService';
 

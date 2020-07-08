@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 
 import ICreateDebtorsDTO from '@modules/debtors/dtos/ICreateDebtorsDTO';
 import IDebtorsRepository from '@modules/debtors/interfaces/IDebtorsRepository';
+
 import Debtor from '../entities/Debtor';
 
 class DebtorsRepository implements IDebtorsRepository {

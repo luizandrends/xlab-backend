@@ -1,7 +1,8 @@
 import { injectable, inject } from 'tsyringe';
 
-import IDebtorsRepository from '@modules/debtors/interfaces/IDebtorsRepository';
 import AppError from '@shared/errors/AppError';
+
+import IDebtorsRepository from '@modules/debtors/interfaces/IDebtorsRepository';
 import IDebtsRepository from '../interfaces/IDebtsRepository';
 
 import Debt from '../infra/database/entities/Debt';

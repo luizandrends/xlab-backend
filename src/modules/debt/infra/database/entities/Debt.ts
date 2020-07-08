@@ -8,6 +8,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+
 import Debtor from '@modules/debtors/infra/database/entities/Debtor';
 
 @Entity('debts')

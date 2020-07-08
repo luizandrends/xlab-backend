@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
+
 import IUsersRepository from '../interfaces/IUsersRepository';
 
 import User from '../infra/database/entities/User';
