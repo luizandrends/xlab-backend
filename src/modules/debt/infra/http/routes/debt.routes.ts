@@ -7,11 +7,13 @@ import CreateDebtController from '../controllers/CreateDebtController';
 import DeleteDebtController from '../controllers/DeleteDebtController';
 import ListDebtorsDebtsController from '../controllers/ListDebtorsDebtsController';
 import ListDebtsController from '../controllers/ListDebtsController';
+import ShowDebtController from '../controllers/ShowDebtController';
 
 const createDebtController = new CreateDebtController();
 const deleteDebtController = new DeleteDebtController();
 const listDebtorsDebtsController = new ListDebtorsDebtsController();
 const listDebtsController = new ListDebtsController();
+const showDebtController = new ShowDebtController();
 
 const debtRouter = Router();
 
@@ -30,6 +32,16 @@ debtRouter.post(
 );
 
 debtRouter.get('/list', ensureAuthenticated, listDebtsController.list);
+debtRouter.get(
+  '/show/:debt_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      debt_id: Joi.string().required(),
+    },
+  }),
+  ensureAuthenticated,
+  showDebtController.show
+);
 
 debtRouter.get(
   '/list/debtor/:debtor_id',

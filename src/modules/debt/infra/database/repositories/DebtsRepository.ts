@@ -15,6 +15,7 @@ class FakeDebtsRepository implements IDebtsRepository {
   public async findById(debt_id: string): Promise<Debt | undefined> {
     const findDebt = this.ormRepository.findOne({
       where: { id: debt_id },
+      relations: ['debtor'],
     });
 
     return findDebt;
