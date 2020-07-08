@@ -7,7 +7,7 @@ let fakeDebtorRepository: FakeDebtorsRepository;
 let createDebtorService: CreateDebitorService;
 let deleteDebtorService: DeleteDebtorService;
 
-describe('ListDebtors', () => {
+describe('DeleteDebtor', () => {
   beforeEach(() => {
     fakeDebtorRepository = new FakeDebtorsRepository();
 
