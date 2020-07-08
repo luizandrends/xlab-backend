@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "YOUR HOST",
+  "port": "YOUR PORT",
+  "username": "YOUR USERNAME",
+  "password": "YOUR PASSWORD",
+  "database": "YOUR DATABASE",
+  "entities": [
+    "./src/modules/**/infra/database/entities/*.ts"
+  ],
+  "migrations": [
+    "./src/shared/infra/database/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/database/migrations"
+  }
+}

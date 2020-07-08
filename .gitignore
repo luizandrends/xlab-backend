@@ -5,3 +5,5 @@ tmp/*
 coverage
 digitalocean
 digitalocean.pub
+.env
+ormconfig.json
