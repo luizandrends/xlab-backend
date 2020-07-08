@@ -6,6 +6,7 @@ import '@shared/infra/database';
 import '@shared/container';
 
 import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 import { errors } from 'celebrate';
 
 import routes from '@shared/infra/http/routes';
@@ -25,6 +26,7 @@ class App {
 
   private middlewares(): void {
     this.express.use(express.json());
+    this.express.use(cors());
   }
 
   private routes(): void {
