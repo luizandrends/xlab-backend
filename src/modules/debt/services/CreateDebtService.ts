@@ -1,5 +1,4 @@
 import { inject, injectable } from 'tsyringe';
-import { isBefore } from 'date-fns';
 
 import AppError from '@shared/errors/AppError';
 
@@ -46,10 +45,6 @@ class CreateDebtService {
         'You cannot create the same debt to the same debtor',
         400
       );
-    }
-
-    if (isBefore(date, Date.now())) {
-      throw new AppError('You cannot create a past debt', 400);
     }
 
     const debt = await this.debtsRepository.create({

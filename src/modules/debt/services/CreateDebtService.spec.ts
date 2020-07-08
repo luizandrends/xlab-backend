@@ -75,21 +75,4 @@ describe('CreateDebt', () => {
       })
     ).rejects.toBeInstanceOf(AppError);
   });
-
-  it('should not be able to create a new debt with a past date', async () => {
-    const debtor = await createDebtorService.execute({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      cpf: '100.200.300-40',
-    });
-
-    await expect(
-      createDebtService.execute({
-        debtor_id: debtor.id,
-        debt_reason: 'Credit card bill',
-        date: new Date(2019, 5, 10, 11),
-        value: 900,
-      })
-    ).rejects.toBeInstanceOf(AppError);
-  });
 });
