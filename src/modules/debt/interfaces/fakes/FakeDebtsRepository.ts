@@ -41,7 +41,7 @@ class FakeDebtsRepository implements IDebtsRepository {
     return debt;
   }
 
-  public async listDebts(): Promise<Debt[]> {
+  public async list(): Promise<Debt[]> {
     const listDebts = this.debts.map(debt => {
       return debt;
     });

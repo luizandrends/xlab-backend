@@ -6,6 +6,6 @@ export default interface IDebtsRepository {
   findByDebtor(debtor_id: string): Promise<Debt | undefined>;
   findByReason(reason: string, debtor_id: string): Promise<Debt | undefined>;
   create(debtDate: ICreateDebtDTO): Promise<Debt>;
-  listDebts(): Promise<Debt[]>;
+  list(): Promise<Debt[]>;
   save(debt: Debt): Promise<Debt>;
 }
