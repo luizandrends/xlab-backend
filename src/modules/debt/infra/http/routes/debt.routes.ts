@@ -6,10 +6,12 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAut
 import CreateDebtController from '../controllers/CreateDebtController';
 import DeleteDebtController from '../controllers/DeleteDebtController';
 import ListDebtorsDebtsController from '../controllers/ListDebtorsDebtsController';
+import ListDebtsController from '../controllers/ListDebtsController';
 
 const createDebtController = new CreateDebtController();
 const deleteDebtController = new DeleteDebtController();
 const listDebtorsDebtsController = new ListDebtorsDebtsController();
+const listDebtsController = new ListDebtsController();
 
 const debtRouter = Router();
 
@@ -26,6 +28,8 @@ debtRouter.post(
   }),
   createDebtController.create
 );
+
+debtRouter.get('/list', ensureAuthenticated, listDebtsController.list);
 
 debtRouter.get(
   '/list/debtor/:debtor_id',

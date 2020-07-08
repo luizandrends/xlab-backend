@@ -23,6 +23,7 @@ class FakeDebtsRepository implements IDebtsRepository {
   public async findByDebtor(debtor_id: string): Promise<Debt | undefined> {
     const findDebt = this.ormRepository.findOne({
       where: { debtor_id },
+      relations: ['debtor'],
     });
 
     return findDebt;
@@ -48,7 +49,9 @@ class FakeDebtsRepository implements IDebtsRepository {
   }
 
   public async list(): Promise<Debt[]> {
-    const listDebts = this.ormRepository.find();
+    const listDebts = this.ormRepository.find({
+      relations: ['debtor'],
+    });
 
     return listDebts;
   }
