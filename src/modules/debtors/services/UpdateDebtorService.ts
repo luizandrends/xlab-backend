@@ -34,11 +34,11 @@ class UpdateDebtorService {
     }
 
     if (findDebtorByEmail) {
-      throw new AppError('Email already registered');
+      throw new AppError('Email already registered', 400);
     }
 
     if (findDebtorByCpf) {
-      throw new AppError('Cpf already registered');
+      throw new AppError('Cpf already registered', 400);
     }
 
     debtor.name = name;

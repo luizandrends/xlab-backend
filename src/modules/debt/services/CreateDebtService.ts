@@ -41,7 +41,10 @@ class CreateDebtService {
     }
 
     if (findReason) {
-      throw new AppError('You cannot create the same debt to the same debtor');
+      throw new AppError(
+        'You cannot create the same debt to the same debtor',
+        400
+      );
     }
 
     if (isBefore(date, Date.now())) {
