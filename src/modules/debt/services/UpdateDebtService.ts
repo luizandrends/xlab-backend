@@ -44,6 +44,8 @@ class UpdateDebtService {
     debt.debt_reason = debt_reason;
     debt.value = value;
 
+    await this.debtsRepository.save(debt);
+
     return debt;
   }
 }

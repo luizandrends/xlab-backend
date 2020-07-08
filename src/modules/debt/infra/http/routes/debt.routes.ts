@@ -8,12 +8,14 @@ import DeleteDebtController from '../controllers/DeleteDebtController';
 import ListDebtorsDebtsController from '../controllers/ListDebtorsDebtsController';
 import ListDebtsController from '../controllers/ListDebtsController';
 import ShowDebtController from '../controllers/ShowDebtController';
+import UpdateDebtController from '../controllers/UpdateDebtController';
 
 const createDebtController = new CreateDebtController();
 const deleteDebtController = new DeleteDebtController();
 const listDebtorsDebtsController = new ListDebtorsDebtsController();
 const listDebtsController = new ListDebtsController();
 const showDebtController = new ShowDebtController();
+const updateDebtController = new UpdateDebtController();
 
 const debtRouter = Router();
 
@@ -41,6 +43,22 @@ debtRouter.get(
   }),
   ensureAuthenticated,
   showDebtController.show
+);
+
+debtRouter.put(
+  '/update/:debt_id',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.BODY]: {
+      debtor_id: Joi.string(),
+      debt_reason: Joi.string(),
+      value: Joi.number(),
+    },
+    [Segments.PARAMS]: {
+      debt_id: Joi.string().required(),
+    },
+  }),
+  updateDebtController.update
 );
 
 debtRouter.get(
