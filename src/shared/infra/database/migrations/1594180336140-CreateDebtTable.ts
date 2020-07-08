@@ -27,6 +27,10 @@ export default class CreateDebtTable1594180336140
             type: 'timestamp',
           },
           {
+            name: 'value',
+            type: 'float',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

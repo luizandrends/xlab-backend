@@ -18,6 +18,10 @@ class Debt {
   @Column()
   debtor_id: string;
 
+  @ManyToOne(() => Debtor)
+  @JoinColumn({ name: 'debtor_id' })
+  debtor: Debtor;
+
   @Column()
   debt_reason: string;
 
@@ -26,10 +30,6 @@ class Debt {
 
   @Column()
   value: number;
-
-  @ManyToOne(() => Debtor)
-  @JoinColumn({ name: 'debtor_id' })
-  debtor: Debtor;
 
   @CreateDateColumn()
   created_at: Date;
