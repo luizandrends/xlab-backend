@@ -47,8 +47,14 @@ describe('UpdateDebtor', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should not be able to update a debtor with an existent email', async () => {
-    const debtor = await createDebtorService.execute({
+  it('should not be able to update the email from a debtor with a different id', async () => {
+    await fakeDebtorRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@gmail.com',
+      cpf: '100.200.300-40',
+    });
+
+    const debtor = await fakeDebtorRepository.create({
       name: 'John Doe',
       email: 'johndoe@gmail.com',
       cpf: '100.200.300-40',
@@ -57,25 +63,31 @@ describe('UpdateDebtor', () => {
     await expect(
       updateDebtorService.execute({
         debtor_id: debtor.id,
-        name: 'Dohn Joe',
+        name: 'John Doe',
         email: 'johndoe@gmail.com',
-        cpf: '500.600.700-80',
+        cpf: '100.200.300-40',
       })
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to update a debtor with an existent cpf', async () => {
-    const debtor = await createDebtorService.execute({
+    await createDebtorService.execute({
       name: 'John Doe',
       email: 'johndoe@gmail.com',
       cpf: '100.200.300-40',
+    });
+
+    const debtor = await createDebtorService.execute({
+      name: 'John Doe',
+      email: 'doejohn@gmail.com',
+      cpf: '500.400.600-70',
     });
 
     expect(
       updateDebtorService.execute({
         debtor_id: debtor.id,
         name: 'Dohn Joe',
-        email: 'dohnjoe@gmail.com',
+        email: 'doejohn@gmail.com',
         cpf: '100.200.300-40',
       })
     ).rejects.toBeInstanceOf(AppError);

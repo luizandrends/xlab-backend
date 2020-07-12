@@ -8,12 +8,14 @@ import ListDebtorsController from '../controllers/ListDebtorsController';
 import ShowDebtorController from '../controllers/ShowDebtorController';
 import UpdateDebtorController from '../controllers/UpdateDebtorController';
 import DeleteDebtorController from '../controllers/DeleteDebtorController';
+import FindDebtorByNameController from '../controllers/FindDebtorByNameController';
 
 const createDebtorController = new CreateDebtorController();
 const listDebtorsController = new ListDebtorsController();
 const showDebtorController = new ShowDebtorController();
 const updateDebtorController = new UpdateDebtorController();
 const deleteDebtorController = new DeleteDebtorController();
+const findDebtorByNameController = new FindDebtorByNameController();
 
 const debtorRouter = Router();
 
@@ -43,17 +45,28 @@ debtorRouter.get(
   showDebtorController.show
 );
 
+debtorRouter.get(
+  '/find/:debtor_name',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.PARAMS]: {
+      debtor_name: Joi.string().required(),
+    },
+  }),
+  findDebtorByNameController.find
+);
+
 debtorRouter.put(
   '/update/:debtor_id',
   ensureAuthenticated,
   celebrate({
     [Segments.BODY]: {
-      name: Joi.string(),
-      email: Joi.string().email(),
-      cpf: Joi.string(),
+      name: Joi.string().required(),
+      email: Joi.string().required(),
+      cpf: Joi.string().required(),
     },
     [Segments.PARAMS]: {
-      debtor_id: Joi.string().required(),
+      debtor_id: Joi.string(),
     },
   }),
   updateDebtorController.update

@@ -11,6 +11,7 @@ interface IRequest {
   debt_id: string;
   debtor_id: string;
   debt_reason: string;
+  date: Date;
   value: number;
 }
 
@@ -28,6 +29,7 @@ class UpdateDebtService {
     debt_id,
     debtor_id,
     debt_reason,
+    date,
     value,
   }: IRequest): Promise<Debt> {
     const debt = await this.debtsRepository.findById(debt_id);
@@ -43,6 +45,7 @@ class UpdateDebtService {
 
     debt.debtor_id = debtor_id;
     debt.debt_reason = debt_reason;
+    debt.date = date;
     debt.value = value;
 
     await this.debtsRepository.save(debt);

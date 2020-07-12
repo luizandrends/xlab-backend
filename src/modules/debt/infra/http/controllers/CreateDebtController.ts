@@ -7,6 +7,8 @@ class CreateDebtController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { debtor_id, debt_reason, date, value } = request.body;
 
+    console.log(request.body);
+
     const createDebt = container.resolve(CreateDebtService);
 
     const debt = await createDebt.execute({

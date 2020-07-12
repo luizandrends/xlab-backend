@@ -31,20 +31,9 @@ class CreateDebtService {
     value,
   }: IRequest): Promise<Debt> {
     const findDebtor = await this.debtorsRepository.findById(debtor_id);
-    const findReason = await this.debtsRepository.findByReason(
-      debt_reason,
-      debtor_id
-    );
 
     if (!findDebtor) {
       throw new AppError('Unexistent debtor', 400);
-    }
-
-    if (findReason) {
-      throw new AppError(
-        'You cannot create the same debt to the same debtor',
-        400
-      );
     }
 
     const debt = await this.debtsRepository.create({

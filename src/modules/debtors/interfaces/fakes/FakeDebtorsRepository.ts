@@ -26,6 +26,14 @@ class FakeDebtorsRepository implements IDebtorsRepository {
     return findDebtor;
   }
 
+  public async findByName(name: string): Promise<(Debtor | undefined)[]> {
+    const listDebtorByName = this.debtors.map(debtor => {
+      return debtor.name === name ? debtor : undefined;
+    });
+
+    return listDebtorByName;
+  }
+
   public async create(debtorData: ICreateDebtorsDTO): Promise<Debtor> {
     const debtor = new Debtor();
 

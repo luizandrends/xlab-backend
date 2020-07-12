@@ -6,7 +6,7 @@ import UpdateDebtService from '@modules/debt/services/UpdateDebtService';
 class CreateDebtController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { debt_id } = request.params;
-    const { debtor_id, debt_reason, value } = request.body;
+    const { debtor_id, debt_reason, date, value } = request.body;
 
     const updateDebt = container.resolve(UpdateDebtService);
 
@@ -14,6 +14,7 @@ class CreateDebtController {
       debt_id,
       debtor_id,
       debt_reason,
+      date,
       value,
     });
 

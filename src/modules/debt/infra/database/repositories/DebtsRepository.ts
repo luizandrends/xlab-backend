@@ -41,6 +41,17 @@ class FakeDebtsRepository implements IDebtsRepository {
     return findDebt;
   }
 
+  public async findByReasonName(
+    debt_reason: string
+  ): Promise<(Debt | undefined)[]> {
+    const findDebt = await this.ormRepository.find({
+      where: { debt_reason },
+      relations: ['debtor'],
+    });
+
+    return findDebt;
+  }
+
   public async create(data: ICreateDebtDTO): Promise<Debt> {
     const debt = this.ormRepository.create(data);
 

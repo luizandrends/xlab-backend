@@ -4,28 +4,30 @@ import AppError from '@shared/errors/AppError';
 
 import IDebtsRepository from '../interfaces/IDebtsRepository';
 
+import Debt from '../infra/database/entities/Debt';
+
 interface IRequest {
-  debt_id: string;
+  debt_reason: string;
 }
 
 @injectable()
-class DeleteDebtService {
+class ShowDebtService {
   constructor(
     @inject('DebtsRepository')
     private debtsRepository: IDebtsRepository
   ) {}
 
-  public async execute({ debt_id }: IRequest): Promise<void> {
-    const debt = await this.debtsRepository.findById(debt_id);
+  public async execute({
+    debt_reason,
+  }: IRequest): Promise<(Debt | undefined)[]> {
+    const debts = await this.debtsRepository.findByReasonName(debt_reason);
 
-    if (!debt) {
+    if (debts.length === 0) {
       throw new AppError('Debt not found', 400);
     }
 
-    debt.deleted_at = new Date();
-
-    await this.debtsRepository.save(debt);
+    return debts;
   }
 }
 
-export default DeleteDebtService;
+export default ShowDebtService;

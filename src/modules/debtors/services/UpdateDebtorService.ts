@@ -34,11 +34,11 @@ class UpdateDebtorService {
       throw new AppError('Unexistent debtor', 400);
     }
 
-    if (findDebtorByEmail) {
+    if (findDebtorByEmail && findDebtorByEmail.id !== debtor_id) {
       throw new AppError('Email already registered', 400);
     }
 
-    if (findDebtorByCpf) {
+    if (findDebtorByCpf && findDebtorByCpf.id !== debtor_id) {
       throw new AppError('Cpf already registered', 400);
     }
 

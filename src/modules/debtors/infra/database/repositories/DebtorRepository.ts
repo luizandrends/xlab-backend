@@ -36,6 +36,16 @@ class DebtorsRepository implements IDebtorsRepository {
     return findDebtor;
   }
 
+  public async findByName(
+    debtor_name: string
+  ): Promise<(Debtor | undefined)[]> {
+    const findDebtor = await this.ormRepository.find({
+      where: { name: debtor_name },
+    });
+
+    return findDebtor;
+  }
+
   public async create(debtorData: ICreateDebtorsDTO): Promise<Debtor> {
     const debtor = this.ormRepository.create(debtorData);
 
