@@ -61,6 +61,10 @@
   <li>Neste repositório esta sendo utilizado o Repository Pattern.  Controller (recebe a request) -> Services (regras de negócio e percistencia de dados) -> Repositories (Persiste o objeto em si).</li>
 <ol>
 </div>
+  
+<div>
+  <h2>Para rodar o servidor basta ir no seu terminal e rodar o comando yarn dev:server</h2>
+</div>
 
 <div>
 <h2> Documentação de rotas </h2>
