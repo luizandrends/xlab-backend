@@ -52,7 +52,6 @@ describe('UpdateDebt', () => {
       debt_id: debt.id,
       debtor_id: debtor.id,
       debt_reason: 'New Reason',
-      date: new Date(),
       value: 700,
     });
 
@@ -66,7 +65,6 @@ describe('UpdateDebt', () => {
         debt_id: 'unexistent-debit',
         debtor_id: 'user-id',
         debt_reason: 'Credit card bill',
-        date: new Date(),
         value: 500,
       })
     ).rejects.toBeInstanceOf(AppError);
@@ -91,7 +89,6 @@ describe('UpdateDebt', () => {
         debt_id: debt.id,
         debtor_id: 'unexistent-user',
         debt_reason: 'Credit card billing',
-        date: new Date(),
         value: 700,
       })
     ).rejects.toBeInstanceOf(AppError);

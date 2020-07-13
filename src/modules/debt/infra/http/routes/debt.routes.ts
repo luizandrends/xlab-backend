@@ -65,7 +65,6 @@ debtRouter.put(
     [Segments.BODY]: {
       debtor_id: Joi.string(),
       debt_reason: Joi.string(),
-      date: Joi.date(),
       value: Joi.number(),
     },
     [Segments.PARAMS]: {
